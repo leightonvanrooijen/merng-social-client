@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import clsx from "clsx";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
@@ -36,7 +36,7 @@ export default function CustomizedInputBase({ postId }) {
   const [submitComment] = useMutation(SUBMIT_COMMENT_MUTATION, {
     update() {
       setComment("");
-      // commentInputRef.current.blur();
+      commentInputRef.current.blur();
     },
     variables: {
       postId,

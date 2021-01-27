@@ -32,7 +32,6 @@ const Paper = withStyles((theme) => ({
 
 export default function Comment({ comment, user, postId }) {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
 
   return (
     <Paper elevation={0} className={classes.root}>

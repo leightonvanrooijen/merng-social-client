@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
-import { validateSDL } from "graphql/validation/validate";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";

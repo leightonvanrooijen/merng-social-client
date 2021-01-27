@@ -1,7 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
-import { useQuery, useMutation } from "@apollo/client";
 import clsx from "clsx";
 import moment from "moment";
 import Button from "@material-ui/core/Button";
@@ -11,21 +9,9 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
 import CommentIcon from "@material-ui/icons/Comment";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import {
-  Divider,
-  OutlinedInput,
-  FormControl,
-  InputLabel,
-  Tooltip,
-} from "@material-ui/core";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import SendIcon from "@material-ui/icons/Send";
-
+import { Divider, Tooltip } from "@material-ui/core";
 import { AuthContext } from "../contex/auth";
 import LikeButton from "./LikeButton";
 import DeleteButton from "./DeleteButton";
@@ -91,16 +77,6 @@ export default function PostCard({
             {username[0]}
           </Avatar>
         }
-        // action={
-        //   <IconButton
-        //     aria-label="settings"
-        //     component={Link}
-        //     to={`/posts/:${id}`}
-
-        //   >
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
         title={username}
         subheader={moment(createdAt).fromNow(true)}
       />
@@ -114,14 +90,13 @@ export default function PostCard({
         <LikeButton user={user} post={{ id, likes, likeCount }} />
         <Tooltip title="View Comments" enterDelay={1200}>
           <Button
-            className={clsx(classes.expand, {
+            className={clsx(classes.expand, classes.buttonGrey, {
               [classes.expandOpen]: expanded,
             })}
-            className={classes.buttonGrey}
             onClick={handleExpandClick}
             aria-expanded={expanded}
             aria-label="write/view commments"
-            startIcon={<CommentIcon  />}
+            startIcon={<CommentIcon />}
           >
             {commentCount}
           </Button>
