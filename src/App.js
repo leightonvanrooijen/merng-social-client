@@ -8,6 +8,8 @@ import SideBar from "./components/SideBar";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    overflowX: "hidden",
+
   },
   content: {
     padding: theme.spacing(3),
@@ -28,7 +30,7 @@ function App() {
             alignItems="center"
             justify="center"
           >
-            <Grid item xs={10}>
+            <Grid item xs={12} sm={10}>
               <Routes />
             </Grid>
           </Grid>

@@ -38,6 +38,11 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
+  openDrawer: {
+    position: "fixed",
+    zIndex: 10,
+    margin: "15px"
+  },
   appBar: {
     [theme.breakpoints.up("md")]: {
       width: `calc(100% - ${drawerWidth}px)`,
@@ -107,90 +112,90 @@ function ResponsiveDrawer(props) {
     setSelected(text);
   };
 
-
-  !user ? (drawer = (
-    <div className={classes.drawerDiv}>
-      <Divider />
-      <div className={classes.logoContainer}>
-        <Typography variant="h3">
-          Social <FavoriteBorderIcon fontSize="large" />
-        </Typography>
-      </div>
-      <Divider />
-      <List className={classes.list}>
-        {topSectionLinks.map(({ text, route }, index) => (
-          <ListItem
-            button
-            selected={selected === text.toLowerCase()}
-            key={text}
-            component={Link}
-            to={route}
-            onClick={() => handleClick(text.toLowerCase())}
-          >
-            <Typography variant="h5">
-              <ListItemText disableTypography primary={text} />
+  !user
+    ? (drawer = (
+        <div className={classes.drawerDiv}>
+          <Divider />
+          <div className={classes.logoContainer}>
+            <Typography variant="h3">
+              Social <FavoriteBorderIcon fontSize="large" />
             </Typography>
-          </ListItem>
-        ))}
-      </List>
-      <List className={classes.loginList}>
-        <Divider />
-        {bottomSectionLinks.map(({ text, route }, index) => (
-          <ListItem
-            className={classes.text}
-            button
-            selected={selected === text.toLowerCase()}
-            key={text}
-            component={Link}
-            to={route}
-            onClick={() => handleClick(text.toLowerCase())}
-          >
-            <Typography variant="h5">
-              <ListItemText disableTypography primary={text} />
+          </div>
+          <Divider />
+          <List className={classes.list}>
+            {topSectionLinks.map(({ text, route }, index) => (
+              <ListItem
+                button
+                selected={selected === text.toLowerCase()}
+                key={text}
+                component={Link}
+                to={route}
+                onClick={() => handleClick(text.toLowerCase())}
+              >
+                <Typography variant="h5">
+                  <ListItemText disableTypography primary={text} />
+                </Typography>
+              </ListItem>
+            ))}
+          </List>
+          <List className={classes.loginList}>
+            <Divider />
+            {bottomSectionLinks.map(({ text, route }, index) => (
+              <ListItem
+                className={classes.text}
+                button
+                selected={selected === text.toLowerCase()}
+                key={text}
+                component={Link}
+                to={route}
+                onClick={() => handleClick(text.toLowerCase())}
+              >
+                <Typography variant="h5">
+                  <ListItemText disableTypography primary={text} />
+                </Typography>
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      ))
+    : (drawer = (
+        <div className={classes.drawerDiv}>
+          <Divider />
+          <div className={classes.logoContainer}>
+            <Typography variant="h3">
+              Social <FavoriteBorderIcon fontSize="large" />
             </Typography>
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  )) : 
-  (drawer = (
-    <div className={classes.drawerDiv}>
-      <Divider />
-      <div className={classes.logoContainer}>
-        <Typography variant="h3">
-          Social <FavoriteBorderIcon fontSize="large" />
-        </Typography>
-      </div>
-      <Divider />
-      <List className={classes.list}>
-        <ListItem
-          button
-          selected={selected === "home"}
-          key={"username"}
-          onClick={() => handleClick("home")}
-        >
-          <Typography variant="h5">
-            <ListItemText disableTypography primary={user.username} />
-          </Typography>
-        </ListItem>
-      </List>
-      <Divider />
+          </div>
+          <Divider />
+          <List className={classes.list}>
+            <ListItem
+              button
+              selected={selected === "home"}
+              key={"username"}
+              onClick={() => handleClick("home")}
+            >
+              <Typography variant="h5">
+                <ListItemText disableTypography primary={user.username} />
+              </Typography>
+            </ListItem>
+          </List>
+          <Divider />
 
-      <List className={classes.loginList}>
-      <Divider />
-        <ListItem
-          button
-          selected={selected === "logout"}
-          key={"logout"}
-          onClick={logout}
-        >
-          <Typography variant="h5">
-            <ListItemText disableTypography primary={"Logout"} />
-          </Typography>
-        </ListItem>
-      </List>
-    </div>
-  ))
+          <List className={classes.loginList}>
+            <Divider />
+            <ListItem
+              button
+              selected={selected === "logout"}
+              key={"logout"}
+              onClick={logout}
+            >
+              <Typography variant="h5">
+                <ListItemText disableTypography primary={"Logout"} />
+              </Typography>
+            </ListItem>
+          </List>
+        </div>
+      ));
 
   const container =
     windowDom !== undefined ? () => windowDom().document.body : undefined;
@@ -198,22 +203,18 @@ function ResponsiveDrawer(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Responsive drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <div className={classes.openDrawer}>
+        <IconButton
+          className={classes.appBar}
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          onClick={handleDrawerToggle}
+          className={classes.menuButton}
+        >
+          <MenuIcon fontSize="large" />
+        </IconButton>
+      </div>
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden mdUp implementation="css">
@@ -222,6 +223,7 @@ function ResponsiveDrawer(props) {
             variant="temporary"
             anchor={theme.direction === "rtl" ? "right" : "left"}
             open={mobileOpen}
+            onClick={handleDrawerToggle}
             onClose={handleDrawerToggle}
             classes={{
               paper: classes.drawerPaper,
