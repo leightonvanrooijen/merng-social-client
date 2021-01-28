@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
@@ -9,7 +8,6 @@ import List from "@material-ui/core/List";
 import MuiListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import MenuIcon from "@material-ui/icons/Menu";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
@@ -41,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   openDrawer: {
     position: "fixed",
     zIndex: 10,
-    margin: "15px"
+    marginLeft: "15px"
   },
   appBar: {
     [theme.breakpoints.up("md")]: {
@@ -205,7 +203,6 @@ function ResponsiveDrawer(props) {
       <CssBaseline />
       <div className={classes.openDrawer}>
         <IconButton
-          className={classes.appBar}
           color="inherit"
           aria-label="open drawer"
           edge="start"
