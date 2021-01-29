@@ -23,11 +23,13 @@ This is the React front end of the project so we will focus on that. For the bac
 <br />
 For a more detailed decription check the dependeies in the package-lock.json
 <br />
+
 ## Lauch Project
   open the folder in terminal <br />
   npm install <br />
   npm start <br />
 <br />
+
 ## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App] to learn the available scripts go here (https://github.com/facebook/create-react-app).
